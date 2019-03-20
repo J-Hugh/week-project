@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.hugh.authentication.core.infrastructure.mysql.role.mapper.SysRoleDao">
+  <!--查询一条记录-->
+  <select id="findById" resultMap="SysRoleMap">SELECT <include refid="columns"/> FROM sys_role WHERE ID=#{id}</select>
+  <!--查询所有记录-->
+  <select id="findAll" resultMap="SysRoleMap">SELECT <include refid="columns"/> FROM sys_role</select>
+  <!--按条件查询-->
+  <select id="search" parameterType="map" resultMap="SysRoleMap">SELECT <include refid="columns"/> FROM sys_role
+    <where>
+      <if test="id != null and id != ''">ID = #{id}</if>
+      <if test="roleCode != null and roleCode != ''">AND ROLE_CODE = #{roleCode}</if>
+      <if test="roleName != null and roleName != ''">AND ROLE_NAME = #{roleName}</if>
+      <if test="roleType != null and roleType != ''">AND ROLE_TYPE = #{roleType}</if>
+      <if test="creator != null and creator != ''">AND CREATOR = #{creator}</if>
+      <if test="createTime != null and createTime != ''">AND CREATE_TIME = #{createTime}</if>
+      <if test="modifier != null and modifier != ''">AND MODIFIER = #{modifier}</if>
+      <if test="modifyTime != null and modifyTime != ''">AND MODIFY_TIME = #{modifyTime}</if>
+    </where>
+  </select>
+  <!--分页查询-->
+  <select id="searchByPage" parameterType="map" resultMap="SysRoleMap">SELECT <include refid="columns"/> FROM sys_role
+    <where>
+      <if test="id != null and id != ''">ID = #{id}</if>
+      <if test="roleCode != null and roleCode != ''">AND ROLE_CODE = #{roleCode}</if>
+      <if test="roleName != null and roleName != ''">AND ROLE_NAME = #{roleName}</if>
+      <if test="roleType != null and roleType != ''">AND ROLE_TYPE = #{roleType}</if>
+      <if test="creator != null and creator != ''">AND CREATOR = #{creator}</if>
+      <if test="createTime != null and createTime != ''">AND CREATE_TIME = #{createTime}</if>
+      <if test="modifier != null and modifier != ''">AND MODIFIER = #{modifier}</if>
+      <if test="modifyTime != null and modifyTime != ''">AND MODIFY_TIME = #{modifyTime}</if>
+    </where>
+  </select>
+  <!--插入记录-->
+  <insert id="save" parameterType="com.hugh.authentication.core.infrastructure.mysql.role.domain.SysRole">INSERT INTO sys_role (<include refid="columns"/>) VALUES (#{id},#{roleCode},#{roleName},#{roleType},#{creator},#{createTime},#{modifier},#{modifyTime})</insert>
+  <!--删除记录-->
+  <delete id="delete">DELETE FROM sys_role WHERE ID=#{id}</delete>
+  <!--修改记录-->
+  <update id="update" parameterType="com.hugh.authentication.core.infrastructure.mysql.role.domain.SysRole">UPDATE sys_role
+    <set>
+      <if test="roleCode != null">ROLE_CODE = #{roleCode}, </if>
+      <if test="roleName != null">ROLE_NAME = #{roleName}, </if>
+      <if test="roleType != null">ROLE_TYPE = #{roleType}, </if>
+      <if test="creator != null">CREATOR = #{creator}, </if>
+      <if test="createTime != null">CREATE_TIME = #{createTime}, </if>
+      <if test="modifier != null">MODIFIER = #{modifier}, </if>
+      <if test="modifyTime != null">MODIFY_TIME = #{modifyTime}, </if>
+    </set>WHERE ID=#{id}
+  </update>
+  <!--结果映射-->
+  <resultMap type="com.hugh.authentication.core.infrastructure.mysql.role.domain.SysRole" id="SysRoleMap">
+    <result column="ID" property="id"/>
+    <result column="ROLE_CODE" property="roleCode"/>
+    <result column="ROLE_NAME" property="roleName"/>
+    <result column="ROLE_TYPE" property="roleType"/>
+    <result column="CREATOR" property="creator"/>
+    <result column="CREATE_TIME" property="createTime"/>
+    <result column="MODIFIER" property="modifier"/>
+    <result column="MODIFY_TIME" property="modifyTime"/>
+  </resultMap>
+  <!--查询字段-->
+  <sql id="columns">ID,ROLE_CODE,ROLE_NAME,ROLE_TYPE,CREATOR,CREATE_TIME,MODIFIER,MODIFY_TIME</sql>
+</mapper>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <!-- import Vue.js -->
+    <script src="//vuejs.org/js/vue.js"></script>
+    <!-- import stylesheet -->
+    <link rel="stylesheet" href="//unpkg.com/iview/dist/styles/iview.css">
+    <!-- import iView -->
+    <script src="//unpkg.com/iview/dist/iview.min.js"></script>
+</head>
+<body>
+    <noscript> 请取消禁用script脚本 </noscript>
+    <div id="app"></div>
+</body>
+<script>
+    const roters = [{
+        path: '/',
+        name: '_home',
+        redirect: '/home',
+        component: Main,
+    }];
+
+    const router = new Router({
+        roters,
+        mode: 'history'
+    })
+    new Vue({
+        el: '#app',
+        router,
+    })
+
+</script>
+</html>

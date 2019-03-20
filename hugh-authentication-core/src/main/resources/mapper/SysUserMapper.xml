@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.hugh.authentication.core.infrastructure.mysql.user.mapper.SysUserDao">
+  <!--查询一条记录-->
+  <select id="findById" resultMap="SysUserMap">SELECT <include refid="columns"/> FROM sys_user WHERE ID=#{id}</select>
+  <!--根据账号密码查询-->
+  <select id="findByPwd" resultMap="SysUserMap">SELECT <include refid="columns"/> FROM sys_user WHERE USER_ACCOUNT = #{userAccount} AND USER_PWD = #{userPwd}</select>
+  <!--查询所有记录-->
+  <select id="findAll" resultMap="SysUserMap">SELECT <include refid="columns"/> FROM sys_user</select>
+  <!--按条件查询-->
+  <select id="search" parameterType="map" resultMap="SysUserMap">SELECT <include refid="columns"/> FROM sys_user
+    <where>
+      <if test="id != null and id != ''">ID = #{id}</if>
+      <if test="userCode != null and userCode != ''">AND USER_CODE = #{userCode}</if>
+      <if test="userAccount != null and userAccount != ''">AND USER_ACCOUNT = #{userAccount}</if>
+      <if test="realName != null and realName != ''">AND REAL_NAME = #{realName}</if>
+      <if test="userPwd != null and userPwd != ''">AND USER_PWD = #{userPwd}</if>
+      <if test="deptCode != null and deptCode != ''">AND DEPT_CODE = #{deptCode}</if>
+      <if test="creator != null and creator != ''">AND CREATOR = #{creator}</if>
+      <if test="createTime != null and createTime != ''">AND CREATE_TIME = #{createTime}</if>
+      <if test="modifier != null and modifier != ''">AND MODIFIER = #{modifier}</if>
+      <if test="modifyTime != null and modifyTime != ''">AND MODIFY_TIME = #{modifyTime}</if>
+    </where>
+  </select>
+  <!--分页查询-->
+  <select id="searchByPage" parameterType="map" resultMap="SysUserMap">SELECT <include refid="columns"/> FROM sys_user
+    <where>
+      <if test="id != null and id != ''">ID = #{id}</if>
+      <if test="userCode != null and userCode != ''">AND USER_CODE = #{userCode}</if>
+      <if test="userAccount != null and userAccount != ''">AND USER_ACCOUNT = #{userAccount}</if>
+      <if test="realName != null and realName != ''">AND REAL_NAME = #{realName}</if>
+      <if test="userPwd != null and userPwd != ''">AND USER_PWD = #{userPwd}</if>
+      <if test="deptCode != null and deptCode != ''">AND DEPT_CODE = #{deptCode}</if>
+      <if test="creator != null and creator != ''">AND CREATOR = #{creator}</if>
+      <if test="createTime != null and createTime != ''">AND CREATE_TIME = #{createTime}</if>
+      <if test="modifier != null and modifier != ''">AND MODIFIER = #{modifier}</if>
+      <if test="modifyTime != null and modifyTime != ''">AND MODIFY_TIME = #{modifyTime}</if>
+    </where>
+  </select>
+  <!--插入记录-->
+  <insert id="save" parameterType="com.hugh.authentication.core.infrastructure.mysql.user.domain.SysUser">INSERT INTO sys_user (<include refid="columns"/>) VALUES (#{id},#{userCode},#{userAccount},#{realName},#{userPwd},#{deptCode},#{isTest},#{creator},#{createTime},#{modifier},#{modifyTime})</insert>
+  <!--删除记录-->
+  <delete id="delete">DELETE FROM sys_user WHERE ID=#{id}</delete>
+  <!--修改记录-->
+  <update id="update" parameterType="com.hugh.authentication.core.infrastructure.mysql.user.domain.SysUser">UPDATE sys_user
+    <set>
+      <if test="userCode != null">USER_CODE = #{userCode}, </if>
+      <if test="userAccount != null">USER_ACCOUNT = #{userAccount}, </if>
+      <if test="realName != null">REAL_NAME = #{realName}, </if>
+      <if test="userPwd != null">USER_PWD = #{userPwd}, </if>
+      <if test="deptCode != null">DEPT_CODE = #{deptCode}, </if>
+      <if test="isTest != null">IS_TEST = #{isTest}, </if>
+      <if test="creator != null">CREATOR = #{creator}, </if>
+      <if test="createTime != null">CREATE_TIME = #{createTime}, </if>
+      <if test="modifier != null">MODIFIER = #{modifier}, </if>
+      <if test="modifyTime != null">MODIFY_TIME = #{modifyTime}, </if>
+    </set>WHERE ID=#{id}
+  </update>
+  <!--结果映射-->
+  <resultMap type="com.hugh.authentication.core.infrastructure.mysql.user.domain.SysUser" id="SysUserMap">
+    <result column="ID" property="id"/>
+    <result column="USER_CODE" property="userCode"/>
+    <result column="USER_ACCOUNT" property="userAccount"/>
+    <result column="REAL_NAME" property="realName"/>
+    <result column="USER_PWD" property="userPwd"/>
+    <result column="DEPT_CODE" property="deptCode"/>
+    <result column="IS_TEST" property="isTest"/>
+    <result column="CREATOR" property="creator"/>
+    <result column="CREATE_TIME" property="createTime"/>
+    <result column="MODIFIER" property="modifier"/>
+    <result column="MODIFY_TIME" property="modifyTime"/>
+  </resultMap>
+  <!--查询字段-->
+  <sql id="columns">ID,USER_CODE,USER_ACCOUNT,REAL_NAME,USER_PWD,DEPT_CODE,IS_TEST,CREATOR,CREATE_TIME,MODIFIER,MODIFY_TIME</sql>
+</mapper>
