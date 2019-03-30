@@ -32,6 +32,7 @@ import freemarker.template.utility.NullArgumentException;
  * a request for some template name was already satisfied in the past by one of the loaders, that loader is queried
  * first (stickiness). This behavior can be disabled with {@link #setSticky(boolean)}, then the loaders are always
  * queried in the order of their appearance in the array.
+ * 覆写templateLoader 保证优先远程方式获取layout.vm资源
  *
  * <p>This class is thread-safe.
  */
@@ -80,6 +81,7 @@ public class MultiTemplateLoader implements StatefulTemplateLoader {
             if (lastTemplateLoader != templateLoader) {
                 Object source = templateLoader.findTemplateSource(name);
                 if (source != null) {
+                    //保证优先远程方式获取layout.vm资源
                     if (sticky && !LAYOUT_NAME.equals(name) ) {
                         lastTemplateLoaderForName.put(name, templateLoader);
                     }

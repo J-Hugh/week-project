@@ -14,8 +14,8 @@
         <module>hugh-authentication-core</module>
         <module>app1</module>
         <module>hugh-authentication-sso-sdk</module>
-        <module>hugh-flowable</module>
         <module>hugh-mo-menu</module>
+        <module>hugh-auto-test</module>
     </modules>
 
     <properties>
