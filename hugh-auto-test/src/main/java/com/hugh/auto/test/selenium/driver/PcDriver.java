@@ -7,11 +7,14 @@ import org.openqa.selenium.WebDriver;
  */
 public class PcDriver extends Driver {
 
+    public PcDriver(String nodeUrl) {
+        super(nodeUrl);
+    }
+
     @Override
     public WebDriver initDriver(String nodeUrl) {
 
 
-
-
+        return null;
     }
 }

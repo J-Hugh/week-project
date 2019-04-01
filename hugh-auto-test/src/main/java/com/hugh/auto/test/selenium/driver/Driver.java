@@ -1,5 +1,6 @@
 package com.hugh.auto.test.selenium.driver;
 
+import com.hugh.auto.test.runtime.StepEntity;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -100,6 +101,36 @@ public abstract class Driver {
         scrollIntoView(element);
         Select sel = new Select(element);
         sel.selectByValue(val);
+    }
+
+    private By getBy(String type,String expression){
+        switch (type) {
+            case "id":
+                return By.id(expression);
+            case "name":
+                return By.name(expression);
+            case "css":
+                return By.cssSelector(expression);
+            case "xpath":
+                return By.xpath(expression);
+            case "classname":
+                return By.className(expression);
+            case "atext":
+                return By.linkText(expression);
+            case "patext":
+                return By.partialLinkText(expression);
+            case "tagname":
+                return By.tagName(expression);
+            default:
+                return By.xpath(expression);
+        }
+    }
+
+    void runStep(StepEntity stepEntity) {
+        WebElement element = getElement(getBy(stepEntity.getByType(), stepEntity.getByExpression()));
+        if (element == null) {
+
+        }
     }
 
 }

@@ -1,9 +1,6 @@
 package com.hugh.auto.test.selenium.driver;
 
-import io.appium.java_client.android.AndroidDriver;
-
-import java.net.MalformedURLException;
-import java.net.URL;
+import org.openqa.selenium.WebDriver;
 
 /**
  * Android程序驱动
@@ -15,7 +12,7 @@ public class AdroidDriver extends Driver {
     }
 
     @Override
-    void initDriver(String nodeUrl) {
-        
+    WebDriver initDriver(String nodeUrl) {
+        return null;
     }
 }
