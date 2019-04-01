@@ -5,7 +5,8 @@ package com.hugh.auto.test.common.enumType;
  */
 public enum  BrowserTypeEnum {
 
-    IE("ie","IE");
+    IE("ie","IE浏览器"),
+    CHROME("Chrome","谷歌浏览器");
 
     private String name;
 
