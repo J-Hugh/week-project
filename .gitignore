@@ -1,3 +1,6 @@
 # Created by .ignore support plugin (hsz.mobi)
 .idea
 *.iml
+hugh-authentication-core/target/
+hugh-authentication-sso/target/
+hugh-mo-menu/target/
