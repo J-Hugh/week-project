@@ -1,6 +1,5 @@
 package com.hugh.authentication.sso.controller;
 
-import com.hugh.authentication.core.commons.annotation.EasyValid;
 import com.hugh.authentication.sso.biz.User;
 import com.hugh.authentication.sso.biz.UserBizService;
 import com.hugh.om.menu.annotation.NavLocation;
