@@ -37,7 +37,7 @@ public class ViewResolverInterceptor implements HandlerInterceptor {
         }
         HandlerMethod handlerMethod = (HandlerMethod) handler;
         NavLocation navLocation = handlerMethod.getMethodAnnotation(NavLocation.class);
-        if (null != navLocation) {
+        if (null != navLocation && navLocation.hasLeftMenu()) {
             String targetView = modelAndView.getViewName();
             modelAndView.setViewName("/layout");
             Map<String, Object> model = modelAndView.getModel();
