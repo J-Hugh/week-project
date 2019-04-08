@@ -4,11 +4,11 @@ import com.hugh.auto.test.runtime.domain.Environment;
 import org.openqa.selenium.WebDriver;
 
 /**
- * Android程序驱动
+ * IOS程序驱动
  */
-public class AdroidDriver extends Driver {
+public class IosDriver extends Driver {
 
-    public AdroidDriver(Environment environment) {
+    public IosDriver(Environment environment) {
         super(environment);
     }
 

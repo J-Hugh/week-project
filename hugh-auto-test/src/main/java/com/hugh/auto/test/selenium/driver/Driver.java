@@ -1,12 +1,8 @@
 package com.hugh.auto.test.selenium.driver;
 
-import com.hugh.auto.test.runtime.StepEntity;
-import io.appium.java_client.AppiumDriver;
-import io.appium.java_client.android.AndroidDriver;
-import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import com.hugh.auto.test.runtime.domain.Environment;
+import com.hugh.auto.test.runtime.domain.Step;
+import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.Select;
 
@@ -22,16 +18,16 @@ public abstract class Driver {
 
     private WebDriver webDriver;
 
-    public Driver(String nodeUrl) {
-        webDriver = initDriver(nodeUrl);
+    public Driver(Environment environment) {
+        webDriver = initDriver(environment);
     }
 
     /**
      * 初始化设备
      *
-     * @param nodeUrl 节点地址
+     * @param environment 运行环境
      */
-    abstract WebDriver initDriver(String nodeUrl);
+    abstract WebDriver initDriver(Environment environment);
 
     /**
      * 获取元素
@@ -189,6 +185,19 @@ public abstract class Driver {
         }
     }
 
+    /**
+     * 截图
+     */
+    public void screenShot() {
+        File screenShotFile = ((TakesScreenshot) webDriver).getScreenshotAs(OutputType.FILE);
+        try {
+            //FileUtils.copyFile(screenShotFile, new File(path +"\\"+ name + ".jpg"));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+
     public By getBy(String type, String expression) {
         switch (type) {
             case "id":
@@ -215,17 +224,17 @@ public abstract class Driver {
     /**
      * 执行一条用例
      *
-     * @param stepEntity
+     * @param step
      * @throws Exception
      */
-    public void runStep(StepEntity stepEntity) throws Exception {
-        WebElement element = getElement(getBy(stepEntity.getByType(), stepEntity.getByExpression()));
+    public void runStep(Step step) throws Exception {
+        WebElement element = getElement(getBy(step.getByType(), step.getByExpression()));
         if (element == null) {
             throw new Exception("元素不存在");
         }
-        String actionKeyword = stepEntity.getActionKeyword();
-        String testExpectValue = stepEntity.getTestExpectValue();
-        String testData = stepEntity.getTestData();
+        String actionKeyword = step.getActionKeyword();
+        String testExpectValue = step.getTestExpectValue();
+        String testData = step.getTestData();
         switch (actionKeyword) {
             case "input":
                 inputText(element,testExpectValue);

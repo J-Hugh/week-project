@@ -1,7 +1,10 @@
 package com.hugh.auto.test.selenium.driver;
 
+import com.hugh.auto.test.runtime.domain.Environment;
 import lombok.extern.slf4j.Slf4j;
+import org.openqa.selenium.Platform;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
 import java.net.MalformedURLException;
@@ -13,14 +16,17 @@ import java.net.URL;
 @Slf4j
 public class PcDriver extends Driver {
 
-    public PcDriver(String nodeUrl) {
-        super(nodeUrl);
+    public PcDriver(Environment environment) {
+        super(environment);
     }
 
     @Override
-    public WebDriver initDriver(String nodeUrl) {
+    public WebDriver initDriver(Environment environment) {
         try {
-            RemoteWebDriver webDriver = new RemoteWebDriver(new URL(nodeUrl), null);
+            DesiredCapabilities capability = new DesiredCapabilities(environment.getBrowserName(), environment.getVersion(), environment.getPlatform());
+
+            RemoteWebDriver webDriver = new RemoteWebDriver(new URL(environment.getNodeUrl()), capability);
+
             return webDriver;
         } catch (MalformedURLException e) {
             e.printStackTrace();
