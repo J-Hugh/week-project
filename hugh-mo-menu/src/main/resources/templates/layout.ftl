@@ -10,6 +10,6 @@
 <body>
 <h1>menu </h1>
 <#include "${content}">
-<h1>tooter</h1>
+<h1>footer</h1>
 </body>
 </html>
