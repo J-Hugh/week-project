@@ -93,12 +93,7 @@
                         </Submenu>
                     </i-menu>
                 </Sider>
-                <Layout :style="{padding: '0 24px 24px'}">
-                    <Breadcrumb :style="{margin: '24px 0'}">
-                        <BreadcrumbItem>Home</BreadcrumbItem>
-                        <BreadcrumbItem>Components</BreadcrumbItem>
-                        <BreadcrumbItem>Layout</BreadcrumbItem>
-                    </Breadcrumb>
+                <Layout :style="{padding: '12px 24px 24px'}">
                     <Content :style="{padding: '24px',  background: '#fff'}">
                         <#include "${content}">
                     </Content>
