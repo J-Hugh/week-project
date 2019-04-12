@@ -1,58 +1,120 @@
 <!DOCTYPE html>
 <html>
-
 <head>
-    <meta charset="UTF-8">
-    <title></title>
-    <script src="http://oss.sheetjs.com/js-xlsx/xlsx.full.min.js"></script>
+    <meta charset="utf-8">
+    <title>iview example</title>
+    <!-- import Vue.js -->
+    <script src="//vuejs.org/js/vue.min.js"></script>
+    <!-- import stylesheet -->
+    <link rel="stylesheet" href="//unpkg.com/iview/dist/styles/iview.css">
+    <!-- import iView -->
+    <script src="//unpkg.com/iview/dist/iview.min.js"></script>
 </head>
-
 <body>
-<input id="stepFile" type="file" accept=".xls"/>
-<button type="button" onclick="send()">执行</button>
-<div id="demo"></div>
+<style scoped>
+    .layout{
+        border: 1px solid #d7dde4;
+        background: #f5f7f9;
+        position: relative;
+        border-radius: 4px;
+        overflow: hidden;
+    }
+    .layout-logo{
+        width: 100px;
+        height: 30px;
+        background: #5b6270;
+        border-radius: 3px;
+        float: left;
+        position: relative;
+        top: 15px;
+        left: 20px;
+    }
+    .layout-nav{
+        width: 420px;
+        margin: 0 auto;
+        margin-right: 20px;
+    }
+</style>
+
+<div id="app">
+    <div class="layout">
+        <Layout>
+            <Header>
+                <i-menu mode="horizontal" theme="dark" active-name="1">
+                    <div class="layout-logo"></div>
+                    <div class="layout-nav">
+                        <menu-item name="1">
+                            <Icon type="ios-navigate"></Icon>
+                            Item 1
+                        </menu-item>
+                        <menu-item name="2">
+                            <Icon type="ios-keypad"></Icon>
+                            Item 2
+                        </menu-item>
+                        <menu-item name="3">
+                            <Icon type="ios-analytics"></Icon>
+                            Item 3
+                        </menu-item>
+                        <menu-item name="4">
+                            <Icon type="ios-paper"></Icon>
+                            Item 4
+                        </menu-item>
+                    </div>
+                </i-menu>
+            </Header>
+            <Layout>
+                <Sider hide-trigger :style="{background: '#fff'}">
+                    <i-menu active-name="1-2" theme="light" width="auto" :open-names="['1']" theme="dark" accordion @on-open-change="menuChange">
+                        <Submenu name="1">
+                            <template slot="title">
+                                <Icon type="ios-navigate"></Icon>
+                                Item 1
+                            </template>
+                            <menu-item name="1-1">Option 1</menu-item>
+                            <menu-item name="1-2">Option 2</menu-item>
+                            <menu-item name="1-3">Option 3</menu-item>
+                        </Submenu>
+                        <Submenu name="2">
+                            <template slot="title">
+                                <Icon type="ios-keypad"></Icon>
+                                Item 2
+                            </template>
+                            <menu-item name="2-1">Option 1</menu-item>
+                            <menu-item name="2-2">Option 2</menu-item>
+                        </Submenu>
+                        <Submenu name="3">
+                            <template slot="title">
+                                <Icon type="ios-analytics"></Icon>
+                                Item 3
+                            </template>
+                            <menu-item name="3-1">Option 1</menu-item>
+                            <menu-item name="3-2">Option 2</menu-item>
+                        </Submenu>
+                    </i-menu>
+                </Sider>
+                <Layout :style="{padding: '0 24px 24px'}">
+                    <Breadcrumb :style="{margin: '24px 0'}">
+                        <BreadcrumbItem>Home</BreadcrumbItem>
+                        <BreadcrumbItem>Components</BreadcrumbItem>
+                        <BreadcrumbItem>Layout</BreadcrumbItem>
+                    </Breadcrumb>
+                    <Content :style="{padding: '24px',  background: '#fff'}">
+                        Content
+                    </Content>
+                </Layout>
+            </Layout>
+        </Layout>
+    </div>
+</div>
 <script>
-
-    function send() {
-        let fileInput = document.getElementById("stepFile");
-        if (!fileInput.files[0]) {
-            alert("请选择文件");
-            return;
+    new Vue({
+        el: '#app',
+        methods:{
+            menuChange(val) {
+                console.log(val);
+            }
         }
-        let file = fileInput.files[0];
-        let fileName = file.name;
-        if (".xls" != fileName.substring(fileName.lastIndexOf("."), fileName.length)) {
-            alert("文件类型异常");
-            return;
-        }
-        let data = read(file);
-        console.log(data);
-    }
-
-    let wb;//读取完成的数据
-    let rABS = false; //是否将文件读取为二进制字符串
-
-    function read(f) {//导入
-        let reader = new FileReader();
-        reader.onload = function (e) {
-            let data = e.target.result;
-            wb = XLSX.read(data, {
-                type: 'binary'
-            });
-            document.getElementById("demo").innerHTML = JSON.stringify(XLSX.utils.sheet_to_json(wb.Sheets[wb.SheetNames[0]]));
-        };
-        reader.readAsBinaryString(f);
-    }
-    function fixdata(data) { //文件流转BinaryString
-        let o = "",
-            l = 0,
-            w = 10240;
-        for (; l < data.byteLength / w; ++l) o += String.fromCharCode.apply(null, new Uint8Array(data.slice(l * w, l * w + w)));
-        o += String.fromCharCode.apply(null, new Uint8Array(data.slice(l * w)));
-        return o;
-    }
-
+    })
 </script>
 </body>
-
 </html>

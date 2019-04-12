@@ -27,6 +27,14 @@ public class IndexController {
         return "/home";
     }
 
+    @GetMapping("/testShell")
+    public String testShell() {
+        //
+        // testCaseActuator.start(null);
+
+        return "/testShell";
+    }
+
     @PostMapping("/upload")
     public String singleFileUpload(@RequestParam("file") MultipartFile file, RedirectAttributes redirectAttributes) {
         if (file.isEmpty()) {
