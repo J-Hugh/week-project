@@ -79,7 +79,7 @@ public class SSOHelper {
      * @param request
      * @return
      */
-    public boolean isAjax(HttpServletRequest request) {
+    public static boolean isAjax(HttpServletRequest request) {
         String requestType = request.getHeader("X-Requested-With");
         return (request.getRequestURI().endsWith(".json") || ("XMLHttpRequest".equals(requestType)));
     }

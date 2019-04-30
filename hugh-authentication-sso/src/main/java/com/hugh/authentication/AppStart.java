@@ -5,7 +5,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
 
-@SpringBootApplication
+@SpringBootApplication(scanBasePackages = {"com.hugh.authentication","com.hugh.om.menu"})
 @EnableAspectJAutoProxy(proxyTargetClass = true)
 public class AppStart {
 

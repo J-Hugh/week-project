@@ -1,8 +1,6 @@
 package com.hugh.om.menu.interceptor;
 
 import com.hugh.om.menu.annotation.NavLocation;
-import freemarker.template.Configuration;
-import freemarker.template.Version;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.MDC;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +30,7 @@ public class ViewResolverInterceptor implements HandlerInterceptor {
 
     @Override
     public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
+
         if (null == modelAndView) {
             return;
         }

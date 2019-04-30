@@ -1,4 +1,4 @@
-package com.hugh.authentication.sso.sdk.springmvc.interceptor;
+package com.hugh.authentication.sso.sdk.interceptor;
 
 import com.hugh.authentication.sso.sdk.domain.UserInfo;
 import com.hugh.authentication.sso.sdk.utils.RSA;
@@ -7,11 +7,10 @@ import com.hugh.authentication.sso.sdk.web.LoginContext;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.util.CollectionUtils;
-import org.springframework.util.StringUtils;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.util.List;
+import java.util.Optional;
 
 import static org.springframework.util.StringUtils.*;
 
@@ -100,13 +99,14 @@ public abstract class SsoInterceptor {
      */
     public UserInfo verifyTicket(String ticket, String url, String clientIp, String userAgent) {
         try {
-            //ip_agent_
+
             String res = RSA.decryptString(privateModule, privateExponent, ticket);
-            //TODO
+            res.split("\\|");
+
+
         } catch (Exception e) {
             log.error("不是正确的ticket", e);
         }
-
         return null;
     }
 
@@ -128,10 +128,9 @@ public abstract class SsoInterceptor {
         if (CollectionUtils.isEmpty(excludePathCache)) {
             return false;
         }
-        String s = excludePathCache.stream().filter(v -> uri.startsWith(v)).findFirst().get();
-        return !isEmpty(s);
+        Optional<String> first = excludePathCache.stream().filter(v -> uri.startsWith(v)).findFirst();
+        return first.isPresent();
     }
-
     /**
      * 判断是否需要排除
      * @param request
