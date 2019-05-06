@@ -31,7 +31,7 @@ public abstract class SsoInterceptor {
     /**
      * SSO登录地址
      */
-    private String loginUrl;
+    private String loginUrl = "//www.baidu.com";
 
     /**
      * cookie的私钥解密key
