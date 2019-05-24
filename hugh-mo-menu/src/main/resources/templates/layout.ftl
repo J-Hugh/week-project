@@ -90,9 +90,9 @@
                             <menu-item name="3-1">Option 1</menu-item>
                             <menu-item name="3-2">Option 2</menu-item>
                         </Submenu>
+                        <Layout :style="{padding: '12px 18px 12px'}">
                     </i-menu>
                 </Sider>
-                <Layout :style="{padding: '12px 18px 12px'}">
                     <Content :style="{padding: '24px',  background: '#fff'}">
                         <#include "${content}">
                     </Content>

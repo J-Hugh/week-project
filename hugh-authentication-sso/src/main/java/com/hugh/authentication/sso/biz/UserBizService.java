@@ -28,7 +28,8 @@ public class UserBizService {
 
     public String userLogin(User user,@NotBlank(message = "账号不能为空2") String userAccount, @NotBlank(message = "密码不能为空2") String password, String remoteIP, String userAgent) {
 
-        log.info("要吃饭啦");
+
+
         String userString = "";
         return null;
     }

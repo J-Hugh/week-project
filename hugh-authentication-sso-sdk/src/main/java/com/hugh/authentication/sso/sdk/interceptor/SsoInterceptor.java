@@ -6,6 +6,7 @@ import com.hugh.authentication.sso.sdk.utils.SSOHelper;
 import com.hugh.authentication.sso.sdk.web.LoginContext;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.util.CollectionUtils;
 
 import javax.servlet.http.HttpServletRequest;
@@ -31,7 +32,8 @@ public abstract class SsoInterceptor {
     /**
      * SSO登录地址
      */
-    private String loginUrl = "//www.baidu.com";
+    @Value("${hugh.sso.loginUrl://hugh.com/sso/login}")
+    private String loginUrl;
 
     /**
      * cookie的私钥解密key
@@ -103,7 +105,7 @@ public abstract class SsoInterceptor {
             String res = RSA.decryptString(privateModule, privateExponent, ticket);
             res.split("\\|");
 
-
+            log.info(res);
         } catch (Exception e) {
             log.error("不是正确的ticket", e);
         }
