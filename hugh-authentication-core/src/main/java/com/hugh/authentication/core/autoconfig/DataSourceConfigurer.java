@@ -51,7 +51,7 @@ public class DataSourceConfigurer {
 
     @Bean(name = CORE_SQL_SESSION_TEMPLATE)
     public SqlSessionTemplate setSqlSessionTemplate(@Qualifier("coreSqlSessionFactory") SqlSessionFactory sqlSessionFactory){
-        log.info("初始化sql会话模版...");
+        log.info("初始化sql会话模板...");
         return new SqlSessionTemplate(sqlSessionFactory);
     }
 

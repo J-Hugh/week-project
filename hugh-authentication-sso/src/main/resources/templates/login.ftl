@@ -13,6 +13,8 @@
     <script src="//unpkg.com/iview/dist/iview.min.js"></script>
     <script src="//unpkg.com/iview/dist/locale/en-US.js"></script>
     <script src="//unpkg.com/iview/dist/locale/zh-CN.js"></script>
+    <script src="/static/i18n/login/zh.js"></script>
+    <script src="/static/i18n/login/en.js"></script>
 </head>
 <body>
     <div id="login">

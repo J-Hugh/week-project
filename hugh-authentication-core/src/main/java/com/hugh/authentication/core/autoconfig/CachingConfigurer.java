@@ -51,14 +51,14 @@ public class CachingConfigurer extends CachingConfigurerSupport {
     }
 
     /**
-     * 设置redis默认序列化器
+     *
      * @param redisConnectionFactory
      * @param serializer
      * @return
      */
     @Bean
     public RedisTemplate<Object, Object> redisTemplate(RedisConnectionFactory redisConnectionFactory, Jackson2JsonRedisSerializer serializer) {
-        log.info("初始化reids模版...");
+        log.info("初始化reids模板...");
         RedisTemplate<Object, Object> redisTemplate = new RedisTemplate<>();
         redisTemplate.setConnectionFactory(redisConnectionFactory);
         redisTemplate.setValueSerializer(serializer);

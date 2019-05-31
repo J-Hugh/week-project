@@ -20,7 +20,7 @@ public class SsoMvcConfigurer implements WebMvcConfigurer {
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(springSSOInterceptor).addPathPatterns("/**").excludePathPatterns("/sso/login");
+        registry.addInterceptor(springSSOInterceptor).addPathPatterns("/**").excludePathPatterns("/sso/login").excludePathPatterns("/static/**").excludePathPatterns("/error/**");
     }
 
 }
